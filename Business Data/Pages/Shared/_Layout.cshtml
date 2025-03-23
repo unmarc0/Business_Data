@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Business Data</title>
+    <style>
+        /* Variables de Colores y Transiciones */
+        :root {
+            --primary-color: #2A9D8F;
+            --primary-light: #3CB1A8;
+            --secondary-color: #264653;
+            --accent-color: #E76F51;
+            --background-color: #F1F5F9;
+            --text-color: #333333;
+            --light-gray: #f9f9f9;
+            --white: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        /* Estilos Globales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header Mejorado con Navegación */
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--light-gray);
+            box-shadow: 0 2px 4px var(--shadow);
+            margin-bottom: 30px;
+        }
+
+            header h1 {
+                margin: 0;
+                font-size: 2.5rem;
+                color: var(--primary-color);
+                letter-spacing: 1px;
+            }
+
+        /* Navegación en el Header */
+        nav {
+            margin-top: 10px;
+        }
+
+            nav ul {
+                list-style: none;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+            }
+
+                nav ul li {
+                    display: inline;
+                }
+
+                    nav ul li a {
+                        text-decoration: none;
+                        color: var(--secondary-color);
+                        font-weight: bold;
+                        transition: color var(--transition-speed);
+                    }
+
+                        nav ul li a:hover {
+                            color: var(--primary-color);
+                        }
+
+        /* Footer Mejorado */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--white);
+            border-top: 1px solid var(--light-gray);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 4px var(--shadow);
+        }
+
+        /* Formulario */
+        form {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px var(--shadow);
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            transition: transform var(--transition-speed);
+        }
+
+            form:hover {
+                transform: scale(1.01);
+            }
+
+            form label {
+                font-weight: bold;
+                margin-bottom: 5px;
+                display: block;
+                color: var(--secondary-color);
+            }
+
+            form input[type="text"],
+            form input[type="number"],
+            form input[type="date"],
+            form select {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                transition: all var(--transition-speed);
+                font-size: 1rem;
+            }
+
+                form input:focus,
+                form select:focus {
+                    border-color: var(--primary-color);
+                    outline: none;
+                    box-shadow: 0 0 5px var(--primary-color);
+                }
+
+            form button {
+                grid-column: span 1;
+                padding: 14px;
+                background-color: var(--primary-color);
+                color: var(--white);
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: background-color var(--transition-speed), transform var(--transition-speed);
+            }
+
+                form button:hover {
+                    background-color: var(--secondary-color);
+                    transform: translateY(-2px);
+                }
+
+        /* Tabla de Resultados */
+        .table-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px var(--shadow);
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+            min-width: 800px;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 0.95rem;
+        }
+
+        /* Encabezado de Tabla con Gradiente Sutil */
+        th {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+
+        tr:hover {
+            background-color: #e0f7fa;
+            transition: background-color var(--transition-speed);
+        }
+
+        /* Estilos específicos para la página "Sobre Nosotros" */
+        .about-section {
+            margin-bottom: 30px;
+        }
+
+            .about-section h2 {
+                color: var(--primary-color);
+                margin-bottom: 10px;
+                border-bottom: 2px solid var(--primary-color);
+                padding-bottom: 5px;
+            }
+
+            .about-section p {
+                font-size: 1rem;
+                line-height: 1.6;
+                color: var(--text-color);
+            }
+
+        /* Ajustes Responsivos */
+        @@media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            th, td {
+                padding: 12px 15px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>@ViewData["Title"]</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Empresas</a></li>
+                <li><a href="/AboutUs">Sobre Nosotros</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    <footer>
+        <p>&copy; @DateTime.Now.Year Business Data. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
