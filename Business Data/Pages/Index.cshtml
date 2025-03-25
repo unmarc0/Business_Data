@@ -37,6 +37,11 @@
 
 <!-- Bloque de estilos para el diseño de las gráficas y el formulario -->
 <style>
+
+    button:hover {
+        background-color: #23B55B;
+    }
+
     .chart-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -65,8 +70,9 @@
             max-height: 300px;
         }
 
-    /* Estilos para el formulario */
+    /* Estilos existentes para el formulario en grid (manteniendo el espaciado y distribución) */
     .form-grid {
+        border: 1px solid #ccc;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 15px;
@@ -92,130 +98,184 @@
         }
 
         .form-grid button {
-            grid-column: span 1;
-            padding: 10px 20px; /* Reducir el padding para un botón más pequeño */
-            font-size: 1.2em; /* Ajustar el tamaño de la fuente para que coincida con los otros elementos */
-            background-color: #1abc9c; /* Color turquesa */
+            grid-column: 1 / span 1; /* Ubicarlo en la primera columna */
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #20A754;
             color: white;
             border: none;
-            border-radius: 20px;
+            border-radius: 5px;
             cursor: pointer;
-            width: 40%; /* Ajustar el ancho para que sea más pequeño */
-            margin: 0 auto; /* Centra el botón horizontalmente */
-            text-align: center;
+            height: 50px;
+            width:400px;
+            text-align: center; /* Centra el texto en el botón */
+            justify-self: start; /* Alinea el botón a la izquierda de su celda */
         }
 
             .form-grid button:hover {
-                background-color: #16a085; /* Color turquesa más oscuro al pasar el ratón */
+                background-color: #23B55B;
             }
 
 
+    /* Estilos específicos para el contenedor desplegable del formulario */
+    #filter-wrapper {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+    }
 
-            .form-grid button:hover {
-                background-color: #16a085; /* Color turquesa más oscuro al pasar el ratón */
-            }
+    #filter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+    }
+
+        #filter-header h3 {
+            margin: 0;
+        }
+
+        #filter-header span {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    /* Contenido del filtro inicialmente oculto */
+    #filter-content {
+        display: none;
+        margin-top: 10px;
+    }
+    /* Se muestra cuando se añade la clase 'open' al wrapper */
+    #filter-wrapper.open #filter-content {
+        display: block;
+    }
 </style>
 
-<!-- Formulario de Filtros -->
-<form method="get" class="form-grid">
-    <div>
-        <label for="Nombre">Nombre:</label>
-        <input type="text" id="Nombre" name="Filtro.Nombre" value="@Model.Filtro.Nombre" />
+<!-- Contenedor del formulario de filtros con id específico -->
+<div id="filter-wrapper">
+    <div id="filter-header" onclick="toggleFilter()">
+        <h3>Filtros</h3>
+        <span id="filter-icon">▼</span>
     </div>
-    <div>
-        <label for="Tipo">Tipo:</label>
-        <select id="Tipo" name="Filtro.Tipo">
-            <option value="">Todos</option>
-            @foreach (var item in Model.Tipos)
-            {
-                <option value="@item" selected="@(Model.Filtro.Tipo == item ? "selected" : null)">@item</option>
-            }
-        </select>
+    <div id="filter-content">
+        <!-- Formulario de Filtros (se conserva la clase form-grid para mantener la distribución) -->
+        <form method="get" class="form-grid">
+            <div>
+                <label for="Nombre">Nombre:</label>
+                <input type="text" id="Nombre" name="Filtro.Nombre" value="@Model.Filtro.Nombre" />
+            </div>
+            <div>
+                <label for="Tipo">Tipo:</label>
+                <select id="Tipo" name="Filtro.Tipo">
+                    <option value="">Todos</option>
+                    @foreach (var item in Model.Tipos)
+                    {
+                        <option value="@item" selected="@(Model.Filtro.Tipo == item ? "selected" : null)">@item</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label for="ComunidadAutonoma">Comunidad Autónoma:</label>
+                <select id="ComunidadAutonoma" name="Filtro.ComunidadAutonoma">
+                    <option value="">Todos</option>
+                    @foreach (var item in Model.Comunidades)
+                    {
+                        <option value="@item" selected="@(Model.Filtro.ComunidadAutonoma == item ? "selected" : null)">@item</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label for="Provincia">Provincia:</label>
+                <select id="Provincia" name="Filtro.Provincia">
+                    <option value="">Todos</option>
+                    @foreach (var item in Model.Provincias)
+                    {
+                        <option value="@item" selected="@(Model.Filtro.Provincia == item ? "selected" : null)">@item</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label for="Ciudad">Ciudad:</label>
+                <input type="text" id="Ciudad" name="Filtro.Ciudad" value="@Model.Filtro.Ciudad" />
+            </div>
+            <div>
+                <label for="Direccion">Dirección:</label>
+                <input type="text" id="Direccion" name="Filtro.Direccion" value="@Model.Filtro.Direccion" />
+            </div>
+            <div>
+                <label for="CodigoPostal">Código Postal:</label>
+                <input type="text" id="CodigoPostal" name="Filtro.CodigoPostal" value="@Model.Filtro.CodigoPostal" />
+            </div>
+            <div>
+                <label for="Capital">Capital mínimo:</label>
+                <input type="number" id="Capital" name="Filtro.Capital" step="0.01" value="@(Model.Filtro.Capital?.ToString() ?? string.Empty)" />
+            </div>
+            <div>
+                <label for="Beneficios">Beneficios mínimos:</label>
+                <input type="number" id="Beneficios" name="Filtro.Beneficios" step="0.01" value="@(Model.Filtro.Beneficios?.ToString() ?? string.Empty)" />
+            </div>
+            <div>
+                <label for="Perdidas">Pérdidas mínimas:</label>
+                <input type="number" id="Perdidas" name="Filtro.Perdidas" step="0.01" value="@(Model.Filtro.Perdidas?.ToString() ?? string.Empty)" />
+            </div>
+            <div>
+                <label for="NumeroTrabajadores">Número de trabajadores mínimo:</label>
+                <input type="number" id="NumeroTrabajadores" name="Filtro.NumeroTrabajadores" value="@(Model.Filtro.NumeroTrabajadores?.ToString() ?? string.Empty)" />
+            </div>
+            <div>
+                <label for="Sector">Sector:</label>
+                <select id="Sector" name="Filtro.Sector">
+                    <option value="">Todos</option>
+                    @foreach (var item in Model.Sectores)
+                    {
+                        <option value="@item" selected="@(Model.Filtro.Sector == item ? "selected" : null)">@item</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label for="Subsector">Subsector:</label>
+                <select id="Subsector" name="Filtro.Subsector">
+                    <option value="">Todos</option>
+                    @foreach (var item in Model.Subsectors)
+                    {
+                        <option value="@item" selected="@(Model.Filtro.Subsector == item ? "selected" : null)">@item</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label for="FechaCreacion">Fecha de Creación:</label>
+                <input type="date" id="FechaCreacion" name="Filtro.FechaCreacion" value='@(Model.Filtro.FechaCreacion?.ToString("yyyy-MM-dd") ?? string.Empty)' />
+            </div>
+            <div>
+                <label for="Estado">Estado:</label>
+                <select id="Estado" name="Filtro.Estado">
+                    <option value="">Todos</option>
+                    @foreach (var item in Model.Estados)
+                    {
+                        <option value="@item" selected="@(Model.Filtro.Estado == item ? "selected" : null)">@item</option>
+                    }
+                </select>
+            </div>
+            <button type="submit">Filtrar</button>
+        </form>
     </div>
-    <div>
-        <label for="ComunidadAutonoma">Comunidad Autónoma:</label>
-        <select id="ComunidadAutonoma" name="Filtro.ComunidadAutonoma">
-            <option value="">Todos</option>
-            @foreach (var item in Model.Comunidades)
-            {
-                <option value="@item" selected="@(Model.Filtro.ComunidadAutonoma == item ? "selected" : null)">@item</option>
-            }
-        </select>
-    </div>
-    <div>
-        <label for="Provincia">Provincia:</label>
-        <select id="Provincia" name="Filtro.Provincia">
-            <option value="">Todos</option>
-            @foreach (var item in Model.Provincias)
-            {
-                <option value="@item" selected="@(Model.Filtro.Provincia == item ? "selected" : null)">@item</option>
-            }
-        </select>
-    </div>
-    <div>
-        <label for="Ciudad">Ciudad:</label>
-        <input type="text" id="Ciudad" name="Filtro.Ciudad" value="@Model.Filtro.Ciudad" />
-    </div>
-    <div>
-        <label for="Direccion">Dirección:</label>
-        <input type="text" id="Direccion" name="Filtro.Direccion" value="@Model.Filtro.Direccion" />
-    </div>
-    <div>
-        <label for="CodigoPostal">Código Postal:</label>
-        <input type="text" id="CodigoPostal" name="Filtro.CodigoPostal" value="@Model.Filtro.CodigoPostal" />
-    </div>
-    <div>
-        <label for="Capital">Capital mínimo:</label>
-        <input type="number" id="Capital" name="Filtro.Capital" step="0.01" value="@(Model.Filtro.Capital?.ToString() ?? string.Empty)" />
-    </div>
-    <div>
-        <label for="Beneficios">Beneficios mínimos:</label>
-        <input type="number" id="Beneficios" name="Filtro.Beneficios" step="0.01" value="@(Model.Filtro.Beneficios?.ToString() ?? string.Empty)" />
-    </div>
-    <div>
-        <label for="Perdidas">Pérdidas mínimas:</label>
-        <input type="number" id="Perdidas" name="Filtro.Perdidas" step="0.01" value="@(Model.Filtro.Perdidas?.ToString() ?? string.Empty)" />
-    </div>
-    <div>
-        <label for="NumeroTrabajadores">Número de trabajadores mínimo:</label>
-        <input type="number" id="NumeroTrabajadores" name="Filtro.NumeroTrabajadores" value="@(Model.Filtro.NumeroTrabajadores?.ToString() ?? string.Empty)" />
-    </div>
-    <div>
-        <label for="Sector">Sector:</label>
-        <select id="Sector" name="Filtro.Sector">
-            <option value="">Todos</option>
-            @foreach (var item in Model.Sectores)
-            {
-                <option value="@item" selected="@(Model.Filtro.Sector == item ? "selected" : null)">@item</option>
-            }
-        </select>
-    </div>
-    <div>
-        <label for="Subsector">Subsector:</label>
-        <select id="Subsector" name="Filtro.Subsector">
-            <option value="">Todos</option>
-            @foreach (var item in Model.Subsectors)
-            {
-                <option value="@item" selected="@(Model.Filtro.Subsector == item ? "selected" : null)">@item</option>
-            }
-        </select>
-    </div>
-    <div>
-        <label for="FechaCreacion">Fecha de Creación:</label>
-        <input type="date" id="FechaCreacion" name="Filtro.FechaCreacion" value='@(Model.Filtro.FechaCreacion?.ToString("yyyy-MM-dd") ?? string.Empty)' />
-    </div>
-    <div>
-        <label for="Estado">Estado:</label>
-        <select id="Estado" name="Filtro.Estado">
-            <option value="">Todos</option>
-            @foreach (var item in Model.Estados)
-            {
-                <option value="@item" selected="@(Model.Filtro.Estado == item ? "selected" : null)">@item</option>
-            }
-        </select>
-    </div>
-    <button type="submit">Filtrar</button>
-</form>
+</div>
+
+<!-- JavaScript para alternar el formulario de filtros -->
+<script>
+    function toggleFilter() {
+        var wrapper = document.getElementById('filter-wrapper');
+        var icon = document.getElementById('filter-icon');
+        wrapper.classList.toggle('open');
+        icon.textContent = wrapper.classList.contains('open') ? '▲' : '▼';
+    }
+</script>
+
+
 
 <!-- Tabla de Resultados -->
 <div class="table-container" style="margin-top:20px;">
