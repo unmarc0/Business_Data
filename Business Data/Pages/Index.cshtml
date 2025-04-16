@@ -2,6 +2,7 @@
 @model Business_Data.Pages.IndexModel
 @using System.Text.Json
 @{
+   
     Layout = "~/Pages/Shared/_Layout.cshtml";
     ViewData["Title"] = "Empresas";
 
@@ -36,133 +37,16 @@
 }
 
 <!-- Bloque de estilos para el diseño de las gráficas y el formulario -->
-<style>
-
-    button:hover {
-        background-color: #23B55B;
-    }
-
-    .chart-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        margin-top: 40px;
-    }
-
-    .chart-box {
-        border: 1px solid #ccc;
-        padding: 15px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-        text-align: center;
-    }
-
-        .chart-box h2 {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .chart-box canvas {
-            width: 100% !important;
-            height: auto !important;
-            max-height: 300px;
-        }
-
-    /* Estilos existentes para el formulario en grid (manteniendo el espaciado y distribución) */
-    .form-grid {
-        border: 1px solid #ccc;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 15px;
-        width: 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
-
-        .form-grid div {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-grid label {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-grid input, .form-grid select {
-            padding: 10px;
-            font-size: 1em;
-            box-sizing: border-box;
-        }
-
-        .form-grid button {
-            grid-column: 1 / span 1; /* Ubicarlo en la primera columna */
-            padding: 10px 20px;
-            font-size: 1.2em;
-            background-color: #20A754;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            height: 50px;
-            width:400px;
-            text-align: center; /* Centra el texto en el botón */
-            justify-self: start; /* Alinea el botón a la izquierda de su celda */
-        }
-
-            .form-grid button:hover {
-                background-color: #23B55B;
-            }
 
 
-    /* Estilos específicos para el contenedor desplegable del formulario */
-    #filter-wrapper {
-        border: 1px solid #ccc;
-        padding: 10px;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        background-color: #f9f9f9;
-    }
-
-    #filter-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        padding: 10px;
-        background-color: #f9f9f9;
-        border-radius: 5px;
-    }
-
-        #filter-header h3 {
-            margin: 0;
-        }
-
-        #filter-header span {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-    /* Contenido del filtro inicialmente oculto */
-    #filter-content {
-        display: none;
-        margin-top: 10px;
-    }
-    /* Se muestra cuando se añade la clase 'open' al wrapper */
-    #filter-wrapper.open #filter-content {
-        display: block;
-    }
-</style>
-
-<!-- Contenedor del formulario de filtros con id específico -->
+<!-- Contenedor del formulario de filtros -->
 <div id="filter-wrapper">
     <div id="filter-header" onclick="toggleFilter()">
         <h3>Filtros</h3>
         <span id="filter-icon">▼</span>
     </div>
     <div id="filter-content">
-        <!-- Formulario de Filtros (se conserva la clase form-grid para mantener la distribución) -->
+        <!-- Formulario de Filtros -->
         <form method="get" class="form-grid">
             <div>
                 <label for="Nombre">Nombre:</label>
@@ -264,6 +148,9 @@
         </form>
     </div>
 </div>
+
+
+
 
 <!-- JavaScript para alternar el formulario de filtros -->
 <script>

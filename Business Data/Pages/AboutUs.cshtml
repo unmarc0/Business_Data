@@ -4,37 +4,112 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
     ViewData["Title"] = "Sobre Nosotros";
 }
-<!-- Sección Hero con Imagen -->
-<section class="about-hero" style="text-align: center; margin-bottom: 40px;">
-    <!-- Reemplaza el src por la ruta de la imagen que desees usar -->
-    <img src="~/images/about-placeholder.jpg" alt="Acerca de nosotros" style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+
+<!-- HERO -->
+<section class="about-hero" data-aos="fade-up">
+    
+    <h1 class="about-hero-title">Impulsando el acceso libre a los datos empresariales</h1>
+    <p class="about-hero-subtitle">Porque la información no debería tener barreras.</p>
 </section>
 
-<!-- Sección Quiénes Somos -->
-<section class="about-section">
-    <h2 style="font-family: 'Comic Sans MS', cursive, sans-serif; font-size: 2rem;">¿Quiénes Somos? 🤝</h2>
-    <p style="font-size: 1.1rem; font-family: Arial, sans-serif; line-height: 1.6;">
-        ¡Bienvenido a <strong>Business Data</strong>! Somos un proyecto apasionante creado para democratizar el acceso a información de calidad sobre empresas a nivel nacional. Aquí encontrarás datos, gráficos y análisis sin límites, pensados para que tanto profesionales como curiosos puedan descubrir el mundo empresarial de forma fresca y accesible.
-    </p>
+<!-- CARTAS DE INFORMACIÓN -->
+<div class="about-card-info">
+    <div class="info-card alt" data-aos="fade-up">
+        <h2><i class="fas fa-users"></i> ¿Quiénes Somos?</h2>
+        <p><strong>Business Data</strong> es un proyecto creado por <strong>Marc Olivé Morlà</strong>, estudiante de DAM. Nuestro objetivo es democratizar el acceso a información empresarial en España con una plataforma visual, sencilla y gratuita para todos.</p>
+    </div>
+
+    <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+        <h2><i class="fas fa-rocket"></i> Nuestra Misión</h2>
+        <p>Queremos eliminar las barreras al conocimiento empresarial y facilitar que cualquier persona, desde estudiantes a inversores, puedan acceder a datos relevantes para tomar decisiones más informadas.</p>
+    </div>
+
+    <div class="info-card alt" data-aos="fade-up" data-aos-delay="200">
+        <h2><i class="fas fa-lightbulb"></i> ¿Por qué lo hacemos?</h2>
+        <p>Creemos en la transparencia como motor de cambio. Vivimos en un mundo impulsado por datos, y nuestra meta es hacer que esos datos sean útiles, fáciles de entender y accesibles para todos.</p>
+    </div>
+</div>
+
+
+<!-- PERFIL -->
+<section class="about-section" data-aos="zoom-in">
+    <h2>Conóceme mejor</h2>
+    <div class="about-cards">
+        <div class="about-card">
+            <img src="~/marc.jpg" alt="Marc Olivé" style="width:120px; border-radius:50%; margin-bottom:15px;">
+            <h3>Marc Olivé Morlà</h3>
+            <p>Apasionado por la tecnología, el diseño web y el poder de los datos. Siempre buscando construir herramientas útiles que simplifiquen la vida de las personas.</p>
+        </div>
+    </div>
 </section>
 
-<!-- Sección Nuestra Misión -->
-<section class="about-section">
-    <h2 style="font-family: 'Comic Sans MS', cursive, sans-serif; font-size: 2rem;">Nuestra Misión 🚀</h2>
-    <p style="font-size: 1.1rem; font-family: Arial, sans-serif; line-height: 1.6;">
-        Soy <strong>Marc Olivé Morlà</strong>, el creador de este proyecto y, actualmente, estudiante de Desarrollo de Aplicaciones Multiplataforma en el IES Joan Ramis i Ramis. Mi sueño es derribar barreras y ofrecer información empresarial sin costes, permitiendo que todos puedan acceder a datos que empoderen decisiones y fomenten la transparencia en el mundo de los negocios.
-    </p>
+<!-- VALORES -->
+<section class="about-values" data-aos="fade-up">
+    <h2>Lo que nos mueve</h2>
+    <div class="about-cards reversed">
+        <div class="about-card colored" data-aos="flip-left" data-aos-delay="100">
+            <h3><i class="fas fa-eye"></i> Transparencia</h3>
+            <p>Los datos deben ser claros, abiertos y accesibles para todos, sin barreras.</p>
+        </div>
+        <div class="about-card colored" data-aos="flip-left" data-aos-delay="200">
+            <h3><i class="fas fa-graduation-cap"></i> Educación</h3>
+            <p>Queremos empoderar a estudiantes, emprendedores y curiosos con información real y útil.</p>
+        </div>
+        <div class="about-card colored" data-aos="flip-left" data-aos-delay="300">
+            <h3><i class="fas fa-universal-access"></i> Accesibilidad</h3>
+            <p>Una web rápida, gratuita y sencilla para que cualquiera pueda usarla sin complicaciones.</p>
+        </div>
+    </div>
 </section>
 
-<!-- Sección ¿Por Qué lo Hacemos? -->
-<section class="about-section">
-    <h2 style="font-family: 'Comic Sans MS', cursive, sans-serif; font-size: 2rem;">¿Por Qué lo Hacemos? 💡</h2>
-    <p style="font-size: 1.1rem; font-family: Arial, sans-serif; line-height: 1.6;">
-        En un mundo donde la información es poder, creemos firmemente que todos merecen tener acceso a datos precisos y actualizados. <strong>Business Data</strong> nace de la convicción de que la transparencia y la democratización del conocimiento son esenciales para un crecimiento equitativo. ¡Únete a nosotros y sé parte del cambio!
-    </p>
+<!-- ESTADÍSTICAS -->
+<section class="about-section" data-aos="fade-up">
+    <h2>Business Data en números</h2>
+    <div class="about-cards">
+        <div class="about-card stats">
+            <h3>+5.000</h3>
+            <p>Empresas indexadas</p>
+        </div>
+        <div class="about-card stats">
+            <h3>10+</h3>
+            <p>Gráficas interactivas</p>
+        </div>
+        <div class="about-card stats">
+            <h3>100%</h3>
+            <p>Gratis para todos los usuarios</p>
+        </div>
+    </div>
 </section>
 
-<!-- Llamado a la Acción -->
-<section class="about-section" style="text-align: center; margin-top: 40px;">
-    <p style="font-size: 1.2rem; font-weight: bold;">¿Listo para explorar el mundo empresarial? 🌟</p>
+<!-- LÍNEA DEL TIEMPO HORIZONTAL -->
+<section class="about-section timeline-section horizontal" data-aos="fade-up">
+    <h2>Nuestros Objetivos 🚀</h2>
+    <div class="timeline-container">
+        <div class="timeline-item">
+            <span class="timeline-year">2025</span>
+            <h4>Lanzamiento oficial</h4>
+            <p>Publicamos la primera versión de Business Data con filtros y gráficas para empresas de toda España.</p>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-year">2026</span>
+            <h4>+10.000 empresas</h4>
+            <p>Queremos ampliar la base de datos con el doble de empresas y añadir filtros aún más específicos.</p>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-year">2027</span>
+            <h4>Noticias empresariales</h4>
+            <p>Sección de noticias conectada a APIs externas para ver la actualidad de cada empresa.</p>
+        </div>
+        <div class="timeline-item">
+            <span class="timeline-year">2028</span>
+            <h4>Versión internacional</h4>
+            <p>Ampliar el proyecto con empresas europeas y ofrecer Business Data en inglés.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="about-cta" data-aos="zoom-in">
+    <p>¿Listo para explorar el mundo empresarial como nunca antes? 🌍</p>
+    <a href="/" class="cta-button">Comenzar ahora</a>
 </section>
