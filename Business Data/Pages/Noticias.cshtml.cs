@@ -9,7 +9,7 @@ namespace Business_Data.Pages
     public class NoticiasModel : PageModel
     {
         private readonly IHttpClientFactory _clientFactory;
-        private const string ApiKey = "c3fb96766e67241d9272f579443f6193"; // ⬅️ Cambia aquí por tu API key real
+        private const string ApiKey = "c3fb96766e67241d9272f579443f6193"; 
 
         public List<Noticia> NoticiasEncontradas { get; set; } = new();
         public string EmpresaSeleccionada { get; set; }
