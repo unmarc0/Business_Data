@@ -1,4 +1,91 @@
 ﻿@page
 @model Business_Data.Pages.NoticiasModel
 @{
+    ViewData["Title"] = "Noticias";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<section class="news-section">
+    <h2 class="news-title" data-aos="fade-down">🔎 Buscar Noticias de Empresas</h2>
+
+    <!-- Buscador centrado -->
+    <div class="news-search-area">
+        <div class="news-search-form" data-aos="zoom-in">
+
+            <input type="text" id="empresaInput" placeholder="Introduce el nombre de una empresa..." />
+
+
+            <button onclick="buscarNoticias()">
+                <i class="fas fa-search"></i> Buscar
+            </button>
+        </div>
+        <p class="news-description" data-aos="fade-up" data-aos-delay="200">
+            Introduce el nombre de una empresa y descubre las últimas noticias relacionadas de forma rápida y sencilla.
+        </p>
+    </div>
+
+    <!-- Spinner de carga oculto al principio -->
+    <div id="loadingSpinner" class="spinner" style="display: none;"></div>
+
+    <!-- Contenedor de noticias -->
+    <div id="noticiasContainer" class="news-grid">
+        <!-- Noticias insertadas dinámicamente -->
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        async function buscarNoticias() {
+            const empresa = document.getElementById('empresaInput').value.trim();
+            const contenedor = document.getElementById('noticiasContainer');
+            const spinner = document.getElementById('loadingSpinner');
+            contenedor.innerHTML = "";
+
+            if (!empresa) {
+                alert("Introduce el nombre de una empresa.");
+                return;
+            }
+
+            // Mostrar el spinner
+            spinner.style.display = "block";
+
+            const apiKey = "c3fb96766e67241d9272f579443f6193";
+            const url = `https://gnews.io/api/v4/search?q=${encodeURIComponent(empresa)}&lang=es&country=es&max=10&apikey=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                // Ocultar el spinner
+                spinner.style.display = "none";
+
+                if (data.articles?.length > 0) {
+                    data.articles.forEach((noticia, index) => {
+                        const card = document.createElement("div");
+                        card.className = "news-card";
+                        card.setAttribute("data-aos", "fade-up");
+                        card.setAttribute("data-aos-delay", `${index * 100}`);
+                        card.innerHTML = `
+                            <img src="${noticia.image || '/images/default-news.jpg'}" alt="Imagen noticia" />
+                            <h3>${noticia.title}</h3>
+                            <details>
+                                <summary>Leer más</summary>
+                                <p>${noticia.description || "Sin descripción disponible."}</p>
+                                <a href="${noticia.url}" target="_blank">Ver noticia completa</a>
+                            </details>
+                        `;
+                        contenedor.appendChild(card);
+                    });
+
+                    AOS.refresh();
+                } else {
+                    contenedor.innerHTML = "<p class='no-results'>No se encontraron noticias para esta empresa.</p>";
+                }
+            } catch (error) {
+                console.error("Error al buscar noticias:", error);
+                spinner.style.display = "none";
+                contenedor.innerHTML = "<p class='no-results'>No se pudieron cargar las noticias. Inténtalo más tarde.</p>";
+            }
+        }
+    </script>
 }

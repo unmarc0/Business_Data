@@ -1,0 +1,26 @@
+﻿@page
+@model Business_Data.Pages.ContactoModel
+@{
+    ViewData["Title"] = "Contacto";
+}
+<section class="contact-section" data-aos="fade-up">
+
+    <h2>Contáctanos</h2>
+    <p>¿Tienes preguntas, sugerencias o simplemente quieres saludar? ¡Escríbenos!</p>
+
+    <form method="post" class="form-grid">
+        <div>
+            <label for="Nombre">Nombre</label>
+            <input type="text" id="Nombre" name="Nombre" required />
+        </div>
+        <div>
+            <label for="Email">Correo Electrónico</label>
+            <input type="email" id="Email" name="Email" required />
+        </div>
+        <div style="grid-column: 1 / -1;">
+            <label for="Mensaje">Mensaje</label>
+            <textarea id="Mensaje" name="Mensaje" rows="5" required></textarea>
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+</section>

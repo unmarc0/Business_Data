@@ -9,6 +9,9 @@ builder.Services.AddDbContext<DatosEmpresasContext>(options =>
 
 builder.Services.AddRazorPages();
 
+builder.Services.AddHttpClient();
+
+
 var app = builder.Build();
 
 app.UseStaticFiles();
