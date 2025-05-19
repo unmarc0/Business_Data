@@ -19,10 +19,18 @@ namespace Business_Data.Pages
             _clientFactory = clientFactory;
         }
 
+        [BindProperty(SupportsGet = true)]
+        public string Nombre { get; set; }
+
         public async Task<IActionResult> OnGetBuscarAsync(string empresa)
         {
             if (string.IsNullOrWhiteSpace(empresa))
-                return Page();
+            {
+                if (!string.IsNullOrWhiteSpace(Nombre))
+                    empresa = Nombre;
+                else
+                    return Page();
+            }
 
             EmpresaSeleccionada = empresa;
 
@@ -48,6 +56,7 @@ namespace Business_Data.Pages
 
             return Page();
         }
+
 
         public class GNewsResponse
         {

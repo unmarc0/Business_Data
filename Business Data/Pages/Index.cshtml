@@ -189,7 +189,7 @@
         <tbody>
             @foreach (var empresa in Model.Empresas)
             {
-                <tr>
+                <tr ondblclick="irANoticias('@empresa.Nombre')">
                     <td>@empresa.Nombre</td>
                     <td>@empresa.Tipo</td>
                     <td>@empresa.ComunidadAutonoma</td>
@@ -208,7 +208,16 @@
                 </tr>
             }
         </tbody>
+
     </table>
+
+    <script>
+    function irANoticias(nombreEmpresa) {
+        const nombreCodificado = encodeURIComponent(nombreEmpresa);
+        window.location.href = `/Noticias?nombre=${nombreCodificado}`;
+    }
+</script>
+
    
 </div>
 <!-- Paginación -->
@@ -227,43 +236,92 @@
 </div>
 
 <!-- Contenedor de gráficas en formato 2x2 con diseño mejorado -->
+
 <div class="chart-grid">
     <div class="chart-box">
         <h2>Empresas por Comunidad Autónoma</h2>
         <canvas id="graficoComunidad"></canvas>
+        <div class="download-buttons">
+            <button onclick="descargarImagen('graficoComunidad', 'png')">Descargar PNG</button>
+        </div>
     </div>
     <div class="chart-box">
         <h2>Empresas por Sector</h2>
         <canvas id="graficoSector"></canvas>
+        <div class="download-buttons">
+            <button onclick="descargarImagen('graficoSector', 'png')">Descargar PNG</button>
+        </div>
     </div>
     <div class="chart-box">
         <h2>Empresas por Tipo</h2>
         <canvas id="graficoTipo"></canvas>
+        <div class="download-buttons">
+            <button onclick="descargarImagen('graficoTipo', 'png')">Descargar PNG</button>
+        </div>
     </div>
     <div class="chart-box">
         <h2>Empresas por Estado</h2>
         <canvas id="graficoEstado"></canvas>
+        <div class="download-buttons">
+            <button onclick="descargarImagen('graficoEstado', 'png')">Descargar PNG</button>
+        </div>
     </div>
     <!-- Nuevas gráficas -->
     <div class="chart-box">
         <h2>Empresas por Provincia</h2>
         <canvas id="graficoProvincia"></canvas>
+        <div class="download-buttons">
+            <button onclick="descargarImagen('graficoProvincia', 'png')">Descargar PNG</button>
+        </div>
     </div>
     <div class="chart-box">
         <h2>Empresas por Ciudad</h2>
         <canvas id="graficoCiudad"></canvas>
+        <div class="download-buttons">
+            <button onclick="descargarImagen('graficoCiudad', 'png')">Descargar PNG</button>
+        </div>
     </div>
     <div class="chart-box">
         <h2>Empresas por Capital</h2>
         <canvas id="graficoCapital"></canvas>
+        <div class="download-buttons">
+            <button onclick="descargarImagen('graficoCapital', 'png')">Descargar PNG</button>
+        </div>
     </div>
     <div class="chart-box">
         <h2>Empresas por Trabajadores</h2>
         <canvas id="graficoTrabajadores"></canvas>
+        <div class="download-buttons">
+            <button onclick="descargarImagen('graficoTrabajadores', 'png')">Descargar PNG</button>
+        </div>
     </div>
 </div>
 
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    function descargarImagen(idCanvas, formato) {
+        const canvas = document.getElementById(idCanvas);
+        const link = document.createElement('a');
+
+        const formatos = {
+            png: 'image/png',
+            jpeg: 'image/jpeg'
+        };
+
+        if (!formatos[formato]) {
+            alert('Formato no soportado');
+            return;
+        }
+
+        link.href = canvas.toDataURL(formatos[formato]);
+        link.download = idCanvas + '.' + formato;
+        link.click();
+    }
+</script>
+
+
 <script>
     // Gráfica: Empresas por Comunidad Autónoma
     const labelsComunidad = @Html.Raw(comunidadesJson);

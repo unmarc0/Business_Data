@@ -22,6 +22,8 @@
         <p class="news-description" data-aos="fade-up" data-aos-delay="200">
             Introduce el nombre de una empresa y descubre las últimas noticias relacionadas de forma rápida y sencilla.
         </p>
+
+
     </div>
 
     <!-- Spinner de carga oculto al principio -->
@@ -34,6 +36,19 @@
 </section>
 
 @section Scripts {
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const nombre = params.get("nombre");
+            if (nombre) {
+                const input = document.getElementById("empresaInput");
+                input.value = nombre;
+                buscarNoticias();
+            }
+        });
+    </script>
+
     <script>
         async function buscarNoticias() {
             const empresa = document.getElementById('empresaInput').value.trim();
